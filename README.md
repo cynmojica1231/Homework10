@@ -6,7 +6,7 @@ Create an application that can be used to write, save, and delete notes. This ap
 
 ## Note Take Demo
 
-![Gif demo of README-generator](./public/assets/images/Notetaker-demo.gif)
+![Gif demo of Note taker](assets/images/Notetaker-demo.gif)
 
 ### Deploying the App
 
