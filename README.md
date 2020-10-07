@@ -6,7 +6,7 @@ Create an application that can be used to write, save, and delete notes. This ap
 
 ## Note Take Demo
 
-![Note.take.demo](./public/assets/images/Notetaker-demo.gif)
+![Note.take.demo CLI](./public/assets/images/Notetaker-demo.gif)
 
 ## Deploying the App
 
