@@ -1,65 +1,50 @@
-/* DEPENDENCIES */
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
-const notesArray = require("./db/db.json");
-
-/* SETS UP THE EXPRESS APP */
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = 8080;
+const mainDir = path.join(__dirname, "/public");
 
-/* SETS UP THE EXPRESS APP TO HANDLE DATA PARSING */
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Use /public as root folder
-app.use(express.static(__dirname + "/public"));
-
-/* STARTS THE SERVER TO BEGIN LISTENING */
-app.listen(PORT, function () {
-  console.log("App listening on PORT " + PORT);
-});
-
-/* ROUTES */
 
 // GETs
-
-// Basic routes that take user to each HTML page
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "public/index.html"));
-});
-
 app.get("/notes", function (req, res) {
-  res.sendFile(path.join(__dirname, "public/notes.html"));
+  res.sendFile(path.join(mainDir, "notes.html"));
 });
 
-// Returns all notes from notesArray when getNotes() is called in index.js
 app.get("/api/notes", function (req, res) {
-  return res.json(JSON.parse(fs.readFileSync("./db/db.json")));
+  res.sendFile(path.join(__dirname, "/db/db.json"));
+});
+
+app.get("/api/notes/:id", function (req, res) {
+  let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  res.json(savedNotes[Number(req.params.id)]);
+});
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(mainDir, "index.html"));
 });
 
 // POSTs
 
-// Route for saving a note to db.json
 app.post("/api/notes", function (req, res) {
-  // req.body is JSON post sent from UI
-  let newNoteRequest = req.body;
-  console.log("New request: ", newNoteRequest);
+  let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  let newNote = req.body;
+  let uniqueID = savedNotes.length.toString();
+  newNote.id = uniqueID;
+  savedNotes.push(newNote);
 
-  notesArray.push(newNoteRequest);
-  // Set id property of newNoteRequest to its index in notesArray
-  newNoteRequest.id = notesArray.indexOf(newNoteRequest);
-
-  fs.writeFileSync("./db/db.json", JSON.stringify(notesArray));
-
-  res.json({
-    isError: false,
-    message: "Note successfully saved",
-    port: PORT,
-    status: 200,
-    success: true,
-  });
+  fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+  console.log("Note saved to db.json. Content: ", newNote);
+  res.json(savedNotes);
 });
+
+
+// DELETEs
+
 app.delete("/api/notes/:id", function (req, res) {
   let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
   let noteID = req.params.id;
