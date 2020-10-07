@@ -8,14 +8,20 @@ Create an application that can be used to write, save, and delete notes. This ap
 
 ![Note.take.demo CLI](./public/assets/images/Notetaker-demo.gif)
 
-## Deploying the App
+### Deploying the App
 
-![Note.taker.demo]https://pure-brook-00455.herokuapp.com/
+![Note.taker.demo] https://pure-brook-00455.herokuapp.com/
 
 ---
 
-## Submission on BCS
+## Installation
 
-You are required to submit the following:
+To install necessary dependencies, run the following command:
 
-- ![URL.Github.Repository] The URL of the GitHub repository
+```
+npm i
+```
+
+## License
+
+This project is licensed under the MIT license.
