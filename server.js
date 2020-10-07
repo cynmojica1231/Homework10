@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const port = 8080;
+const PORT = process.env.PORT || 8080;
 const notesArray = path.join(__dirname, "/public");
 
 app.use(express.static("public"));
@@ -59,7 +59,6 @@ app.delete("/api/notes/:id", function (req, res) {
   }
 
   fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
-  res.json(savedNotes);
   res.json({
     isError: false,
     message: "Note successfully deleted",
@@ -69,6 +68,6 @@ app.delete("/api/notes/:id", function (req, res) {
   });
 });
 
-app.listen(port, function () {
-  console.log(`Now listening to port ${port}. Enjoy your stay!`);
+app.listen(PORT, function () {
+  console.log("App listening on PORT: " + PORT);
 });
