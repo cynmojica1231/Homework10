@@ -4,14 +4,13 @@
 
 Create an application that can be used to write, save, and delete notes. This application will use an express backend and save and retrieve note data from a JSON file.
 
-
 ## Note Take Demo
 
-![Note.taker.Demo](./public/assets/images/Notetaker-demo.gif)
+![Note.take.demo](./public/assets/images/Notetaker-demo.gif)
 
 ## Deploying the App
 
-![Deploy.Heroku.Link] https://pure-brook-00455.herokuapp.com/
+![Note.taker.demo]https://pure-brook-00455.herokuapp.com/
 
 ---
 
