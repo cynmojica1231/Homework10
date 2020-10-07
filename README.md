@@ -10,7 +10,7 @@ Create an application that can be used to write, save, and delete notes. This ap
 
 ### Deploying the App
 
-![Note.taker.demo] https://pure-brook-00455.herokuapp.com/
+https://pure-brook-00455.herokuapp.com/
 
 ---
 
